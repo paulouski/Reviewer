@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if you add them later)
+node_modules/
+
+# Test data for local development
+js/test-data.js
+
+package-lock.json
+
+docs/

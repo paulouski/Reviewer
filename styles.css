@@ -1,0 +1,54 @@
+/* Custom styles - mostly using Tailwind, but some specific overrides */
+
+.config-tab.active {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.config-tab.active:hover {
+    background-color: #4338ca;
+}
+
+/* Fix modal content area height to prevent shrinking when switching tabs */
+#configModal > .bg-white.rounded-lg {
+    min-height: 863px;
+}
+
+#configModal > .bg-white.rounded-lg > .flex-1.overflow-hidden.flex {
+    min-height: 700px;
+}
+
+/* Model pricing tooltip styles */
+.model-pricing-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.model-pricing-icon:hover {
+    opacity: 0.7;
+}
+
+.model-pricing-icon svg {
+    transition: color 0.2s;
+}
+
+.model-pricing-tooltip {
+    pointer-events: none;
+    animation: fadeIn 0.2s ease-in;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
