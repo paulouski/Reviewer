@@ -11,7 +11,6 @@ const domCache = {
     loadingText: null,
     
     // Setup form elements
-    apiKey: null,
     jobDescription: null,
     candidateCV: null,
     
@@ -54,7 +53,6 @@ const domCache = {
         this.loadingText = document.getElementById('loadingText');
         
         // Setup form
-        this.apiKey = document.getElementById('apiKey');
         this.jobDescription = document.getElementById('jobDescription');
         this.candidateCV = document.getElementById('candidateCV');
         

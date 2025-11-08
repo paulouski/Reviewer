@@ -40,6 +40,9 @@ async function initializeApp() {
         clearSessionCache();
     }
     
+    // Load form data from cache
+    loadFormDataToFields();
+    
     // Setup event listeners
     setupEventListeners();
 }
@@ -93,6 +96,47 @@ function setupEventListeners() {
             dialogArea.innerHTML = '';
         }
     });
+    
+    // Form data change listeners - save to cache on input
+    const jobDescriptionEl = domCache.get('jobDescription');
+    const candidateCVEl = domCache.get('candidateCV');
+    
+    if (jobDescriptionEl) {
+        jobDescriptionEl.addEventListener('input', () => {
+            const jobDescription = jobDescriptionEl.value.trim();
+            const cv = candidateCVEl ? candidateCVEl.value.trim() : '';
+            saveFormData(jobDescription, cv);
+        });
+    }
+    
+    if (candidateCVEl) {
+        candidateCVEl.addEventListener('input', () => {
+            const jobDescription = jobDescriptionEl ? jobDescriptionEl.value.trim() : '';
+            const cv = candidateCVEl.value.trim();
+            saveFormData(jobDescription, cv);
+        });
+    }
+}
+
+/**
+ * Loads form data from cache and populates form fields
+ */
+function loadFormDataToFields() {
+    const formData = loadFormData();
+    if (!formData) {
+        return;
+    }
+    
+    const jobDescriptionEl = domCache.get('jobDescription');
+    const candidateCVEl = domCache.get('candidateCV');
+    
+    if (jobDescriptionEl && formData.jobDescription) {
+        jobDescriptionEl.value = formData.jobDescription;
+    }
+    
+    if (candidateCVEl && formData.cv) {
+        candidateCVEl.value = formData.cv;
+    }
 }
 
 // Initialize app when DOM is ready

@@ -73,22 +73,17 @@ function validateApiKey(apiKey) {
 
 function updateApiKeyUI() {
     const apiKey = getApiKey();
-    const apiKeyInput = domCache.get('apiKey');
-    const apiKeyInputContainer = document.getElementById('apiKeyInputContainer');
     const apiKeyStatus = document.getElementById('apiKeyStatus');
     const changeApiKeyBtn = document.getElementById('changeApiKeyBtn');
     
-    if (!apiKeyInput || !apiKeyInputContainer || !apiKeyStatus || !changeApiKeyBtn) return;
+    if (!apiKeyStatus || !changeApiKeyBtn) return;
     
     if (apiKey) {
-        // Hide input, show status and change button
-        apiKeyInputContainer.classList.add('hidden');
+        // Show status and change button
         apiKeyStatus.classList.remove('hidden');
         changeApiKeyBtn.classList.remove('hidden');
-        apiKeyInput.value = apiKey; // Keep value for form submission
     } else {
-        // Show input, hide status and change button
-        apiKeyInputContainer.classList.remove('hidden');
+        // Hide status and change button (user needs to enter key via modal)
         apiKeyStatus.classList.add('hidden');
         changeApiKeyBtn.classList.add('hidden');
     }

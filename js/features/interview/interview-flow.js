@@ -26,13 +26,15 @@ async function startInterview() {
     // Clear any existing session cache when starting new interview
     clearSessionCache();
     
-    // Get API key from localStorage or form
-    const apiKeyEl = domCache.get('apiKey');
+    // Clear form data cache when starting new interview
+    clearFormData();
+    
+    // Get API key from encrypted storage
     const jobDescriptionEl = domCache.get('jobDescription');
     const candidateCVEl = domCache.get('candidateCV');
     const enableFinalSummaryEl = document.getElementById('enableFinalSummary');
     
-    const apiKey = getApiKey() || (apiKeyEl ? apiKeyEl.value.trim() : '');
+    const apiKey = getApiKey();
     const jobDescription = jobDescriptionEl ? jobDescriptionEl.value.trim() : '';
     const candidateCV = candidateCVEl ? candidateCVEl.value.trim() : '';
     const enableFinalSummary = enableFinalSummaryEl ? enableFinalSummaryEl.checked : false;
@@ -63,10 +65,8 @@ async function startInterview() {
         return;
     }
     
-    // Save API key to encrypted storage if it was entered in form
-    if (!getApiKey()) {
-        await saveApiKey(apiKey);
-    }
+    // API key should already be in encrypted storage (set via modal)
+    // If not, user should be prompted to enter it via modal
     
     setProcessing(true);
     

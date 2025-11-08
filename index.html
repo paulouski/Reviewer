@@ -17,13 +17,9 @@
             <form id="setupForm" class="space-y-4 sm:space-y-6">
                 <div id="apiKeyContainer">
                     <div class="flex items-center justify-between mb-2">
-                        <label class="block text-sm font-medium text-gray-700">OpenAI API Key</label>
                         <button type="button" id="changeApiKeyBtn" class="hidden text-sm text-indigo-600 hover:text-indigo-700 font-medium">
                             Change API Key
                         </button>
-                    </div>
-                    <div id="apiKeyInputContainer">
-                        <input type="password" id="apiKey" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm sm:text-base" placeholder="sk-...">
                     </div>
                     <div id="apiKeyStatus" class="hidden mt-2 text-sm text-green-600">
                         ✓ API key set
@@ -280,6 +276,7 @@
     <script src="js/infrastructure/storage/schema-storage.js"></script>
     <script src="js/infrastructure/storage/session-cache.js"></script>
     <script src="js/infrastructure/storage/session-restore.js"></script>
+    <script src="js/infrastructure/storage/form-cache.js"></script>
     
     <!-- Validation -->
     <script src="js/infrastructure/validation/schema-validator.js"></script>
