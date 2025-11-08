@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; connect-src 'self' https://api.openai.com; img-src 'self' data:;">
     <title>AI Interview Trainer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <!-- Setup Screen -->
-    <div id="setupScreen" class="container mx-auto px-4 py-8">
-        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">AI Interview Trainer</h1>
+    <div id="setupScreen" class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div class="max-w-3xl lg:max-w-5xl mx-auto bg-white rounded-lg shadow-xl p-4 sm:p-6 lg:p-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">AI Interview Trainer</h1>
             
-            <form id="setupForm" class="space-y-6">
+            <form id="setupForm" class="space-y-4 sm:space-y-6">
                 <div id="apiKeyContainer">
                     <div class="flex items-center justify-between mb-2">
                         <label class="block text-sm font-medium text-gray-700">OpenAI API Key</label>
@@ -22,7 +23,7 @@
                         </button>
                     </div>
                     <div id="apiKeyInputContainer">
-                        <input type="password" id="apiKey" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="sk-...">
+                        <input type="password" id="apiKey" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm sm:text-base" placeholder="sk-...">
                     </div>
                     <div id="apiKeyStatus" class="hidden mt-2 text-sm text-green-600">
                         ✓ API key set
@@ -31,26 +32,26 @@
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Job Description</label>
-                    <textarea id="jobDescription" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Paste the job description here..."></textarea>
+                    <textarea id="jobDescription" rows="6" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm sm:text-base" placeholder="Paste the job description here..."></textarea>
                 </div>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Your CV / Resume</label>
-                    <textarea id="candidateCV" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Paste your CV here..."></textarea>
+                    <textarea id="candidateCV" rows="6" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm sm:text-base" placeholder="Paste your CV here..."></textarea>
                 </div>
                 
                 <div>
                     <label class="flex items-center">
-                        <input type="checkbox" id="enableFinalSummary" class="mr-2">
+                        <input type="checkbox" id="enableFinalSummary" class="mr-2 w-4 h-4">
                         <span class="text-sm text-gray-700">Enable Final Summary</span>
                     </label>
                 </div>
                 
-                <div class="flex gap-4">
-                    <button type="submit" class="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <button type="submit" class="flex-1 bg-indigo-600 text-white px-4 sm:px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors text-sm sm:text-base">
                         Start Interview
                     </button>
-                    <button type="button" id="configBtn" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                    <button type="button" id="configBtn" class="px-4 sm:px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors text-sm sm:text-base whitespace-nowrap">
                         Configure Prompts & Models
                     </button>
                 </div>
@@ -59,45 +60,45 @@
     </div>
 
     <!-- Interview Screen -->
-    <div id="interviewScreen" class="hidden container mx-auto px-4 py-8">
-        <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6">
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Interview in Progress</h2>
-                    <p class="text-gray-600 mt-1">
+    <div id="interviewScreen" class="hidden container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div class="w-full max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-4">
+                <div class="flex-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Interview in Progress</h2>
+                    <p class="text-sm sm:text-base text-gray-600 mt-1">
                         Topic <span id="questionCount">0</span> / <span id="maxQuestions">0</span> | 
                         Current: <span id="currentTopic">-</span>
                     </p>
                 </div>
-                <div class="flex gap-2">
-                    <button id="endEarlyBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button id="endEarlyBtn" class="flex-1 sm:flex-none px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm sm:text-base">
                         End Early
                     </button>
-                    <button id="configBtnInterview" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <button id="configBtnInterview" class="flex-1 sm:flex-none px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base">
                         Configure
                     </button>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Dialog Area -->
-                <div class="lg:col-span-3">
-                    <div id="dialogArea" class="bg-gray-50 rounded-lg p-4 h-96 overflow-y-auto mb-4 space-y-4">
+                <div class="lg:col-span-3 order-2 lg:order-1">
+                    <div id="dialogArea" class="bg-gray-50 rounded-lg p-3 sm:p-4 h-64 sm:h-80 lg:h-96 overflow-y-auto mb-4 space-y-3 sm:space-y-4">
                         <!-- Questions and answers will be appended here -->
                     </div>
                     
-                    <div class="flex gap-2">
-                        <textarea id="answerInput" rows="3" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Type your answer here..."></textarea>
-                        <button id="sendAnswerBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <textarea id="answerInput" rows="3" class="flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base" placeholder="Type your answer here..."></textarea>
+                        <button id="sendAnswerBtn" class="px-4 sm:px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base whitespace-nowrap">
                             Send
                         </button>
                     </div>
                 </div>
                 
                 <!-- Topic Status Sidebar -->
-                <div class="lg:col-span-1">
-                    <h3 class="font-semibold text-gray-800 mb-3">Topic Status</h3>
-                    <div id="topicStatusList" class="space-y-2">
+                <div class="lg:col-span-1 order-1 lg:order-2">
+                    <h3 class="font-semibold text-gray-800 mb-2 sm:mb-3 text-sm sm:text-base">Topic Status</h3>
+                    <div id="topicStatusList" class="space-y-2 max-h-40 lg:max-h-none overflow-y-auto lg:overflow-y-visible">
                         <!-- Topic status indicators will be rendered here -->
                     </div>
                 </div>
@@ -106,60 +107,62 @@
     </div>
 
     <!-- Results Screen -->
-    <div id="resultsScreen" class="hidden container mx-auto px-4 py-8">
-        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Interview Results</h2>
+    <div id="resultsScreen" class="hidden container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div class="max-w-5xl lg:max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-4 sm:p-6 lg:p-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">Interview Results</h2>
             
             <!-- Overall Fit -->
-            <div class="text-center mb-8">
-                <div class="inline-block relative w-48 h-48">
-                    <svg class="transform -rotate-90 w-48 h-48">
-                        <circle cx="96" cy="96" r="88" stroke="#e5e7eb" stroke-width="16" fill="none"></circle>
-                        <circle id="fitCircle" cx="96" cy="96" r="88" stroke="#4f46e5" stroke-width="16" fill="none" stroke-dasharray="0 552.92"></circle>
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="inline-block relative w-36 h-36 sm:w-48 sm:h-48">
+                    <svg class="transform -rotate-90 w-36 h-36 sm:w-48 sm:h-48">
+                        <circle cx="72" cy="72" class="sm:hidden" r="64" stroke="#e5e7eb" stroke-width="12" fill="none"></circle>
+                        <circle id="fitCircle" cx="72" cy="72" class="sm:hidden" r="64" stroke="#4f46e5" stroke-width="12" fill="none" stroke-dasharray="0 402"></circle>
+                        <circle cx="96" cy="96" class="hidden sm:block" r="88" stroke="#e5e7eb" stroke-width="16" fill="none"></circle>
+                        <circle id="fitCircleLarge" cx="96" cy="96" class="hidden sm:block" r="88" stroke="#4f46e5" stroke-width="16" fill="none" stroke-dasharray="0 552.92"></circle>
                     </svg>
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="text-center">
-                            <div id="fitPercent" class="text-4xl font-bold text-indigo-600">0%</div>
-                            <div id="fitLabel" class="text-gray-600 mt-1">Fit Score</div>
+                            <div id="fitPercent" class="text-3xl sm:text-4xl font-bold text-indigo-600">0%</div>
+                            <div id="fitLabel" class="text-sm sm:text-base text-gray-600 mt-1">Fit Score</div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Per-Topic Breakdown -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Per-Topic Assessment</h3>
-                <div id="topicBreakdown" class="space-y-3">
+            <div class="mb-6 sm:mb-8">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">Per-Topic Assessment</h3>
+                <div id="topicBreakdown" class="space-y-2 sm:space-y-3">
                     <!-- Topic breakdown will be rendered here -->
                 </div>
             </div>
             
             <!-- Strengths -->
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-green-700 mb-3">Strengths</h3>
-                <ul id="strengthsList" class="list-disc list-inside space-y-1 text-gray-700">
+            <div class="mb-4 sm:mb-6">
+                <h3 class="text-lg sm:text-xl font-semibold text-green-700 mb-2 sm:mb-3">Strengths</h3>
+                <ul id="strengthsList" class="list-disc list-inside space-y-1 text-sm sm:text-base text-gray-700">
                     <!-- Strengths will be rendered here -->
                 </ul>
             </div>
             
             <!-- Weaknesses -->
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-red-700 mb-3">Weaknesses</h3>
-                <ul id="weaknessesList" class="list-disc list-inside space-y-1 text-gray-700">
+            <div class="mb-4 sm:mb-6">
+                <h3 class="text-lg sm:text-xl font-semibold text-red-700 mb-2 sm:mb-3">Weaknesses</h3>
+                <ul id="weaknessesList" class="list-disc list-inside space-y-1 text-sm sm:text-base text-gray-700">
                     <!-- Weaknesses will be rendered here -->
                 </ul>
             </div>
             
             <!-- Recommendations -->
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-blue-700 mb-3">Recommendations</h3>
-                <ul id="recommendationsList" class="list-disc list-inside space-y-1 text-gray-700">
+            <div class="mb-4 sm:mb-6">
+                <h3 class="text-lg sm:text-xl font-semibold text-blue-700 mb-2 sm:mb-3">Recommendations</h3>
+                <ul id="recommendationsList" class="list-disc list-inside space-y-1 text-sm sm:text-base text-gray-700">
                     <!-- Recommendations will be rendered here -->
                 </ul>
             </div>
             
-            <div class="text-center">
-                <button id="newInterviewBtn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+            <div class="text-center mt-6 sm:mt-8">
+                <button id="newInterviewBtn" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors text-sm sm:text-base">
                     Start New Interview
                 </button>
             </div>
@@ -167,77 +170,77 @@
     </div>
 
     <!-- Config Modal -->
-    <div id="configModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl min-w-[600px] max-h-[90vh] overflow-hidden flex flex-col">
-            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 class="text-xl font-bold text-gray-800">Configure Prompts & Models</h3>
-                <button id="closeConfigBtn" class="text-gray-500 hover:text-gray-700">✕</button>
+    <div id="configModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col mx-auto">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800">Configure Prompts & Models</h3>
+                <button id="closeConfigBtn" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
             </div>
             
-            <div class="flex-1 overflow-hidden flex">
+            <div class="flex-1 overflow-hidden flex flex-col sm:flex-row">
                 <!-- Tabs -->
-                <div class="w-48 border-r border-gray-200 bg-gray-50 p-4">
-                    <nav class="space-y-2">
-                        <button class="config-tab w-full text-left px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors" data-tab="planner">Planner</button>
-                        <button class="config-tab w-full text-left px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors" data-tab="topicAgent">TopicAgent</button>
-                        <button class="config-tab w-full text-left px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors" data-tab="finalSummary">FinalSummary</button>
-                        <button class="config-tab w-full text-left px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors" data-tab="settings">Settings</button>
+                <div class="w-full sm:w-48 border-b sm:border-b-0 sm:border-r border-gray-200 bg-gray-50 p-2 sm:p-4">
+                    <nav class="flex sm:flex-col space-x-2 sm:space-x-0 sm:space-y-2 overflow-x-auto sm:overflow-x-visible">
+                        <button class="config-tab whitespace-nowrap sm:whitespace-normal w-auto sm:w-full text-left px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base" data-tab="planner">Planner</button>
+                        <button class="config-tab whitespace-nowrap sm:whitespace-normal w-auto sm:w-full text-left px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base" data-tab="topicAgent">TopicAgent</button>
+                        <button class="config-tab whitespace-nowrap sm:whitespace-normal w-auto sm:w-full text-left px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base" data-tab="finalSummary">FinalSummary</button>
+                        <button class="config-tab whitespace-nowrap sm:whitespace-normal w-auto sm:w-full text-left px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm sm:text-base" data-tab="settings">Settings</button>
                     </nav>
                 </div>
                 
                 <!-- Tab Content -->
-                <div class="flex-1 overflow-y-auto p-6">
+                <div class="flex-1 overflow-y-auto p-4 sm:p-6">
                     <!-- Config tabs (Planner, Interviewer, Reviewer, Evaluator) are generated dynamically by initializeConfigTabs() -->
                     
                     <!-- Settings Tab -->
                     <div id="tab-settings" class="config-tab-content hidden">
-                        <h4 class="text-lg font-semibold mb-4">Settings</h4>
-                        <div class="space-y-4">
+                        <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Settings</h4>
+                        <div class="space-y-3 sm:space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Max Questions Per Topic</label>
-                                <input type="number" id="config-max-questions-per-topic" class="w-full px-4 py-2 border border-gray-300 rounded-lg" min="1" max="20">
+                                <input type="number" id="config-max-questions-per-topic" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm sm:text-base" min="1" max="20">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Max Topics for Planner</label>
-                                <input type="number" id="config-max-topics" class="w-full px-4 py-2 border border-gray-300 rounded-lg" min="1" max="15">
+                                <input type="number" id="config-max-topics" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm sm:text-base" min="1" max="15">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="px-6 py-4 border-t border-gray-200 flex justify-between items-center">
-                <button id="resetConfigBtn" class="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors">Reset to Default</button>
-                <div class="flex gap-4">
-                    <button id="cancelConfigBtn" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
-                    <button id="saveConfigBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">Save</button>
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
+                <button id="resetConfigBtn" class="w-full sm:w-auto px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors text-sm sm:text-base">Reset to Default</button>
+                <div class="flex gap-2 sm:gap-4 w-full sm:w-auto">
+                    <button id="cancelConfigBtn" class="flex-1 sm:flex-none px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base">Cancel</button>
+                    <button id="saveConfigBtn" class="flex-1 sm:flex-none px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base">Save</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- API Key Modal -->
-    <div id="apiKeyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-md mx-4">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-xl font-bold text-gray-800">OpenAI API Key Required</h3>
+    <div id="apiKeyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-md mx-auto">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800">OpenAI API Key Required</h3>
             </div>
             
-            <div class="px-6 py-4">
-                <p class="text-gray-700 mb-4">
+            <div class="px-4 sm:px-6 py-3 sm:py-4">
+                <p class="text-sm sm:text-base text-gray-700 mb-4">
                     Please enter your OpenAI API key to continue. The key will be stored locally in your browser.
                 </p>
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">API Key</label>
-                        <input type="password" id="apiKeyInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="sk-...">
+                        <input type="password" id="apiKeyInput" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm sm:text-base" placeholder="sk-...">
                         <p id="apiKeyError" class="hidden mt-2 text-sm text-red-600"></p>
                     </div>
                 </div>
             </div>
             
-            <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
-                <button id="saveApiKeyBtn" class="px-6 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 flex justify-end">
+                <button id="saveApiKeyBtn" class="w-full sm:w-auto px-6 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors text-sm sm:text-base">
                     Save
                 </button>
             </div>
@@ -245,16 +248,17 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-8 text-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-            <p class="text-gray-700" id="loadingText">Processing...</p>
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg p-6 sm:p-8 text-center max-w-xs w-full mx-auto">
+            <div class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+            <p class="text-sm sm:text-base text-gray-700" id="loadingText">Processing...</p>
         </div>
     </div>
 
     <!-- Scripts -->
-    <!-- TEMPORARY: Test data for local testing - can be removed/disabled for production -->
-    <script src="js/test-data.js"></script>
+    <!-- TEMPORARY: Test data for local testing - disabled for production -->
+    <!-- Uncomment the line below for local development only -->
+    <!-- <script src="js/test-data.js"></script> -->
     
     <!-- ============================================ -->
     <!-- Core Layer - Constants and State Management -->
@@ -270,6 +274,8 @@
     <!-- ============================================ -->
     <!-- Infrastructure Layer - Storage & Validation -->
     <!-- ============================================ -->
+    <!-- Security -->
+    <script src="js/infrastructure/security/crypto-storage.js"></script>
     <!-- Storage -->
     <script src="js/infrastructure/storage/schema-storage.js"></script>
     <script src="js/infrastructure/storage/session-cache.js"></script>

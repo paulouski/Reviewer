@@ -17,9 +17,9 @@ function displayQuestion(questionText) {
     const questionDiv = document.createElement('div');
     questionDiv.className = 'flex justify-start';
     questionDiv.innerHTML = `
-        <div class="bg-indigo-100 rounded-lg px-4 py-2 max-w-3xl">
-            <div class="text-sm font-semibold text-indigo-800 mb-1">Interviewer</div>
-            <div class="text-gray-800">${escapeHtml(questionText)}</div>
+        <div class="bg-indigo-100 rounded-lg px-3 sm:px-4 py-2 max-w-[85%] sm:max-w-2xl lg:max-w-3xl">
+            <div class="text-xs sm:text-sm font-semibold text-indigo-800 mb-1">Interviewer</div>
+            <div class="text-sm sm:text-base text-gray-800">${escapeHtml(questionText)}</div>
         </div>
     `;
     dialogArea.appendChild(questionDiv);
@@ -37,9 +37,9 @@ function displayAnswer(answerText) {
     const answerDiv = document.createElement('div');
     answerDiv.className = 'flex justify-end';
     answerDiv.innerHTML = `
-        <div class="bg-gray-200 rounded-lg px-4 py-2 max-w-3xl">
-            <div class="text-sm font-semibold text-gray-700 mb-1">You</div>
-            <div class="text-gray-800">${escapeHtml(answerText)}</div>
+        <div class="bg-gray-200 rounded-lg px-3 sm:px-4 py-2 max-w-[85%] sm:max-w-2xl lg:max-w-3xl">
+            <div class="text-xs sm:text-sm font-semibold text-gray-700 mb-1">You</div>
+            <div class="text-sm sm:text-base text-gray-800">${escapeHtml(answerText)}</div>
         </div>
     `;
     dialogArea.appendChild(answerDiv);

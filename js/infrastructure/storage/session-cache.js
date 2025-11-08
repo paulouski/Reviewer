@@ -57,8 +57,9 @@ function loadSessionFromCache() {
             return null;
         }
         
-        // Restore session (apiKey will be loaded from localStorage separately)
-        const apiKey = localStorage.getItem('openai_api_key') || '';
+        // Restore session (apiKey will be loaded from encrypted storage separately)
+        // Note: apiKey is loaded via initializeApiKey() in app.js, so we use getApiKey() here
+        const apiKey = getApiKey() || '';
         session = {
             apiKey: apiKey,
             topics: sessionData.topics,

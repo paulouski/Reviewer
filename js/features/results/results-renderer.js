@@ -18,22 +18,40 @@ function renderFinalResults(topicVerdicts, finalSummaryOutput) {
         document.getElementById('fitPercent').textContent = `${Math.round(fitPercent)}%`;
         document.getElementById('fitLabel').textContent = finalSummaryOutput.fit_label || 'Fit Score';
         
-        // Update circular progress
-        const circumference = 2 * Math.PI * 88; // radius = 88
-        const offset = circumference - (fitPercent / 100) * circumference;
-        const circle = document.getElementById('fitCircle');
-        if (circle) {
-            circle.style.strokeDasharray = `${circumference} ${circumference}`;
-            circle.style.strokeDashoffset = offset;
+        // Update circular progress - mobile circle (r=64)
+        const circumferenceMobile = 2 * Math.PI * 64;
+        const offsetMobile = circumferenceMobile - (fitPercent / 100) * circumferenceMobile;
+        const circleMobile = document.getElementById('fitCircle');
+        if (circleMobile) {
+            circleMobile.style.strokeDasharray = `${circumferenceMobile} ${circumferenceMobile}`;
+            circleMobile.style.strokeDashoffset = offsetMobile;
+        }
+        
+        // Update circular progress - desktop circle (r=88)
+        const circumferenceLarge = 2 * Math.PI * 88;
+        const offsetLarge = circumferenceLarge - (fitPercent / 100) * circumferenceLarge;
+        const circleLarge = document.getElementById('fitCircleLarge');
+        if (circleLarge) {
+            circleLarge.style.strokeDasharray = `${circumferenceLarge} ${circumferenceLarge}`;
+            circleLarge.style.strokeDashoffset = offsetLarge;
         }
     } else {
         // Hide overall fit if no summary
         document.getElementById('fitPercent').textContent = '-';
         document.getElementById('fitLabel').textContent = 'No Summary';
-        const circle = document.getElementById('fitCircle');
-        if (circle) {
-            circle.style.strokeDasharray = '0 552.92';
-            circle.style.strokeDashoffset = 0;
+        
+        // Reset mobile circle
+        const circleMobile = document.getElementById('fitCircle');
+        if (circleMobile) {
+            circleMobile.style.strokeDasharray = '0 402';
+            circleMobile.style.strokeDashoffset = 0;
+        }
+        
+        // Reset desktop circle
+        const circleLarge = document.getElementById('fitCircleLarge');
+        if (circleLarge) {
+            circleLarge.style.strokeDasharray = '0 552.92';
+            circleLarge.style.strokeDashoffset = 0;
         }
     }
     

@@ -18,25 +18,13 @@ async function initializeApp() {
     // Load config first (required by other modules)
     await loadConfig();
     
+    // Initialize API key from encrypted storage
+    await initializeApiKey();
+    
     // Check API key on load
     const apiKey = getApiKey();
     if (!apiKey) {
-        try {
-            const response = await fetch('/api/dev-config');
-            if (response.ok) {
-                const config = await response.json();
-                if (config.apiKey) {
-                    saveApiKey(config.apiKey);
-                    updateApiKeyUI();
-                } else {
-                    showApiKeyModal();
-                }
-            } else {
-                showApiKeyModal();
-            }
-        } catch (error) {
-            showApiKeyModal();
-        }
+        showApiKeyModal();
     } else {
         updateApiKeyUI();
     }
@@ -50,20 +38,6 @@ async function initializeApp() {
         console.error('Failed to restore session:', error);
         showNotification('Failed to restore session. Starting fresh.', 'error');
         clearSessionCache();
-    }
-    
-    // Auto-populate form fields with test data if available (for local testing)
-    if (typeof testData !== 'undefined' && testData) {
-        const jobDescriptionEl = domCache.get('jobDescription');
-        const candidateCVEl = domCache.get('candidateCV');
-        
-        if (jobDescriptionEl && testData.jobDescription) {
-            jobDescriptionEl.value = testData.jobDescription;
-        }
-        
-        if (candidateCVEl && testData.candidateCV) {
-            candidateCVEl.value = testData.candidateCV;
-        }
     }
     
     // Setup event listeners

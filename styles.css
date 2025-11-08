@@ -10,12 +10,15 @@
 }
 
 /* Fix modal content area height to prevent shrinking when switching tabs */
-#configModal > .bg-white.rounded-lg {
-    min-height: 863px;
-}
+/* On mobile, don't enforce min-height to allow proper scrolling */
+@media (min-width: 640px) {
+    #configModal > .bg-white.rounded-lg {
+        min-height: 600px;
+    }
 
-#configModal > .bg-white.rounded-lg > .flex-1.overflow-hidden.flex {
-    min-height: 700px;
+    #configModal > .bg-white.rounded-lg > .flex-1.overflow-hidden.flex {
+        min-height: 500px;
+    }
 }
 
 /* Model pricing tooltip styles */
@@ -49,6 +52,43 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Mobile-friendly improvements */
+@media (max-width: 639px) {
+    /* Ensure inputs and textareas are properly sized on mobile */
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Better touch targets for buttons */
+    button {
+        min-height: 44px;
+    }
+    
+    /* Improve dialog messages spacing on mobile */
+    #dialogArea > div {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Ensure modals are properly sized on mobile */
+    #configModal .bg-white.rounded-lg {
+        max-height: 95vh;
+    }
+    
+    /* Better spacing for topic status on mobile */
+    #topicStatusList {
+        max-height: 200px;
+    }
+    
+    /* Prevent horizontal scroll on mobile */
+    body {
+        overflow-x: hidden;
     }
 }
 

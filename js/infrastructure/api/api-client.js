@@ -33,8 +33,9 @@ function cleanPromptText(text) {
  * @throws {Error} If API request fails
  */
 async function callOpenAI(roleName, apiKey, messages, model, useJsonSchema = true, maxOutputTokens = 1000, reasoningEffort = 'medium') {
+    // Log API call without sensitive message content
     console.group(`🤖 API Call: ${roleName}`);
-    console.log('Messages:', messages);
+    console.log(`Model: ${model}, Messages count: ${messages.length}`);
     
     try {
         // Convert messages format to Responses API input format

@@ -63,9 +63,9 @@ async function startInterview() {
         return;
     }
     
-    // Save API key to localStorage if it was entered in form
+    // Save API key to encrypted storage if it was entered in form
     if (!getApiKey()) {
-        saveApiKey(apiKey);
+        await saveApiKey(apiKey);
     }
     
     setProcessing(true);
